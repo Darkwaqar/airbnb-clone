@@ -5,9 +5,11 @@ import { useRoute } from "@react-navigation/native";
 import SearchResultsMap from "../screens/SearchResultsMap";
 import SearchResults from "../screens/SearchResults";
 
+import posts from "../data/feed";
+
 const Tab = createMaterialTopTabNavigator();
 const SearchResultsTabNavigator = () => {
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
 
   const route = useRoute();
   const { guests, viewport } = route.params;

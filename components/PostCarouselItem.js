@@ -23,31 +23,33 @@ const PostCarouselItem = (props) => {
     // <Text>hello</Text>
     <Pressable
       onPress={goToPostPage}
-      style={[tw`h-28 shadow-2xl bg-white m-1 `, { width: width - 60 }]}
+      style={[tw`h-28 bg-white m-1 rounded-lg`, { width: width - 60 }]}
     >
-      <View style={tw`flex-row bg-white `}>
-        {/* Image  */}
-        <Image
-          style={tw`h-full aspect-square`}
-          resizeMode="cover"
-          source={{ uri: post.image }}
-        />
+      <View style={tw`bg-white rounded-lg `}>
+        <View style={tw`flex-row`}>
+          {/* Image  */}
+          <Image
+            style={tw`h-full aspect-square rounded-l-lg`}
+            resizeMode="cover"
+            source={{ uri: post.image }}
+          />
 
-        <View style={{ flex: 1, marginHorizontal: 10 }}>
-          {/* Bed & Bedroom  */}
-          <Text style={tw`text-lg my-2`}>
-            {post.bed} bed {post.bedroom} bedroom
-          </Text>
+          <View style={{ flex: 1, marginHorizontal: 10 }}>
+            {/* Bed & Bedroom  */}
+            <Text style={tw`text-lg my-2`}>
+              {post.bed} bed {post.bedroom} bedroom
+            </Text>
 
-          {/* Type & Description */}
-          <Text style={tw`text-sm`} numberOfLines={2}>
-            {post.type}. {post.title}
-          </Text>
+            {/* Type & Description */}
+            <Text style={tw`text-sm`} numberOfLines={2}>
+              {post.type}. {post.title}
+            </Text>
 
-          {/*  Old price & new price */}
-          <Text style={tw`text-sm my-2`}>
-            <Text style={tw`font-bold`}>${post.newPrice} </Text>/ night
-          </Text>
+            {/*  Old price & new price */}
+            <Text style={tw`text-sm my-2`}>
+              <Text style={tw`font-bold`}>${post.newPrice} </Text>/ night
+            </Text>
+          </View>
         </View>
       </View>
     </Pressable>

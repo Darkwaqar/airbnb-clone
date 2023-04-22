@@ -16,13 +16,16 @@ const Tab = createBottomTabNavigator();
 const HomeTabNavigator = () => {
   return (
     <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
       tabBarOptions={{
         activeTintColor: "#f15454",
       }}
     >
       <Tab.Screen
         name={"Explore"}
-        component={SearchResultsMap}
+        component={ExploreNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Fontisto name="search" size={25} color={color} />

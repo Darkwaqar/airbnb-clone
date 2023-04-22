@@ -8,11 +8,10 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
-import posts from "../data/feed";
 import CustomMarker from "../components/CustomMarker";
 import PostCarouselItem from "../components/PostCarouselItem";
 const SearchResultsMap = (props) => {
-  // const { posts } = props;
+  const { posts } = props;
 
   const [selectedPlaceId, setSelectedPlaceId] = useState(null);
 
