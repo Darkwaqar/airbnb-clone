@@ -16,11 +16,19 @@ const SearchResultsMap = (props) => {
 
   const [selectedPlaceId, setSelectedPlaceId] = useState(null);
 
-  const flatlist = useRef();
+  const flatList = useRef();
   const map = useRef();
 
   const viewConfig = useRef({ itemVisiblePercentThreshold: 70 });
-  const onViewChanged = useRef(({ viewableItems }) => {
+
+  const viewabilityConfigCallbackPairs = useRef([
+    {
+      viewabilityConfig: viewConfig.current,
+      onViewableItemsChanged: onViewableItemsChanged,
+    },
+  ]);
+
+  const onViewableItemsChanged = useRef(({ viewableItems }) => {
     if (viewableItems.length > 0) {
       const selectedPlace = viewableItems[0].item;
       setSelectedPlaceId(selectedPlace.id);
@@ -30,13 +38,14 @@ const SearchResultsMap = (props) => {
   const width = useWindowDimensions().width;
 
   useEffect(() => {
-    if (!selectedPlaceId || !flatlist) {
+    if (!selectedPlaceId || !flatList) {
       return;
     }
     const index = posts.findIndex((place) => place.id === selectedPlaceId);
-    flatlist.current.scrollToIndex({ index });
+    flatList.current.scrollToIndex({ index });
 
     const selectedPlace = posts[index];
+    console.log(selectedPlace);
     const region = {
       latitude: selectedPlace.latitude,
       longitude: selectedPlace.longitude,
@@ -44,7 +53,7 @@ const SearchResultsMap = (props) => {
       longitudeDelta: 0.8,
     };
     map.current.animateToRegion(region);
-  }, []);
+  }, [selectedPlaceId]);
   return (
     <View style={{ width: "100%", height: "100%" }}>
       <MapView
@@ -60,10 +69,12 @@ const SearchResultsMap = (props) => {
       >
         {posts.map((place) => (
           <CustomMarker
-            coordinate={{
-              latitude: place.latitude,
-              longitude: place.longitude,
-            }}
+            // coordinate={{
+            //   latitude: place.latitude,
+            //   longitude: place.longitude,
+            // }}
+            key={place.id}
+            coordinate={place.coordinate}
             price={place.newPrice}
             isSelected={place.id === selectedPlaceId}
             onPress={() => setSelectedPlaceId(place.id)}
@@ -73,14 +84,20 @@ const SearchResultsMap = (props) => {
 
       <View style={{ position: "absolute", bottom: 10 }}>
         <FlatList
-          ref={flatlist}
+          ref={flatList}
           data={posts}
-          renderItem={({ item }) => <PostCarouselItem post={item} />}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <PostCarouselItem post={item} key={item.id} />
+          )}
           horizontal
           showsHorizontalScrollIndicator={false}
           snapToInterval={width - 60}
           snapToAlignment={"center"}
           decelerationRate={"fast"}
+          viewabilityConfigCallbackPairs={
+            viewabilityConfigCallbackPairs.current
+          }
           // viewabilityConfig={viewConfig.current}
           // onViewableItemsChanged={onViewChanged.current}
         />
