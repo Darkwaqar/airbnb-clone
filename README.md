@@ -37,6 +37,12 @@
 
 15. add React native map to the project `yarn add react-native-maps`
 
+16. add amplify
+    `npm install aws-amplify amazon-cognito-identity-js @react-native-community/netinfo @react-native-async-storage/async-storage core-js`
+
+17 init the amplify
+`amplify init`
+
 # preview
 
 | Home                         | List                         | Map                          |
