@@ -12,6 +12,10 @@ import SearchResults from "./screens/SearchResults";
 import HomeTabNavigator from "./navigation/HomeTabNavigator";
 
 const Stack = createStackNavigator();
+import { Amplify } from "aws-amplify";
+import awsConfig from "./src/aws-exports";
+
+Amplify.configure(awsConfig);
 
 export default function App() {
   return (

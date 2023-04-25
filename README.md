@@ -43,6 +43,9 @@
 17 init the amplify
 `amplify init`
 
+18 add amplify auth
+`amplify add auth`
+
 # preview
 
 | Home                         | List                         | Map                          |
