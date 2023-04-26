@@ -3,16 +3,16 @@ import React from "react";
 import tw from "twrnc";
 import { useRoute } from "@react-navigation/native";
 
-import places from "../data/feed";
+// import places from "../data/feed";
 import DetailedPost from "../components/DetailedPost";
 
 const PostScreen = () => {
   const route = useRoute();
 
-  const post = places.find((place) => place.id === route.params?.postId);
+  // const post = places.find((place) => place.id === route.params?.postId);
   return (
     <View style={tw`bg-white`}>
-      <DetailedPost post={post} />
+      <DetailedPost post={route.params?.post} />
     </View>
   );
 };
