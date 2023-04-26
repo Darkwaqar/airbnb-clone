@@ -68,12 +68,12 @@ const SearchResultsMap = (props) => {
       >
         {posts.map((place) => (
           <CustomMarker
-            // coordinate={{
-            //   latitude: place.latitude,
-            //   longitude: place.longitude,
-            // }}
+            coordinate={{
+              latitude: place.latitude,
+              longitude: place.longitude,
+            }}
             key={place.id}
-            coordinate={place.coordinate}
+            // coordinate={place.coordinate}
             price={place.newPrice}
             isSelected={place.id === selectedPlaceId}
             onPress={() => setSelectedPlaceId(place.id)}

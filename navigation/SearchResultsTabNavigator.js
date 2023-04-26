@@ -15,6 +15,12 @@ const SearchResultsTabNavigator = () => {
 
   const route = useRoute();
   const { guests, viewport } = route.params;
+  console.log(route);
+
+  // {"northeast": {"lat": 25.63980105234357, "lng": 67.65694166023007},
+  //  "southwest": {"lat": 24.74660367749837, "lng": 66.65398221921414}}
+
+  //tenerife spain
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -44,6 +50,8 @@ const SearchResultsTabNavigator = () => {
 
     fetchPosts();
   }, []);
+  console.log(posts);
+
   return (
     <Tab.Navigator
       tabBarOptions={{

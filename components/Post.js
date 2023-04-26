@@ -23,7 +23,7 @@ const Post = (props) => {
       <Image
         style={[tw`w-full rounded-xl`, { aspectRatio: 3 / 2 }]}
         resizeMode="cover"
-        source={{ uri: post.image }}
+        source={{ uri: post?.image }}
       />
 
       {/* Bed & Bedroom  */}

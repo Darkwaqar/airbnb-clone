@@ -42,7 +42,7 @@ const PostCarouselItem = (props) => {
 
             {/* Type & Description */}
             <Text style={tw`text-sm`} numberOfLines={2}>
-              {post.type}. {post.title}
+              {post?.type}. {post?.title}
             </Text>
 
             {/*  Old price & new price */}
