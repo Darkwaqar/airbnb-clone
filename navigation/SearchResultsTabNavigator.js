@@ -4,44 +4,46 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { useRoute } from "@react-navigation/native";
 import SearchResultsMap from "../screens/SearchResultsMap";
 import SearchResults from "../screens/SearchResults";
+import { API, graphqlOperation } from "aws-amplify";
+import { listPosts } from "../src/graphql/queries";
 
-import posts from "../data/feed";
+// import posts from "../data/feed";
 
 const Tab = createMaterialTopTabNavigator();
 const SearchResultsTabNavigator = () => {
-  // const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   const route = useRoute();
   const { guests, viewport } = route.params;
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     try {
-  //       const postsResult = await API.graphql(
-  //         graphqlOperation(listPosts, {
-  //           filter: {
-  //             and: {
-  //               maxGuests: {
-  //                 ge: guests,
-  //               },
-  //               latitude: {
-  //                 between: [viewport.southwest.lat, viewport.northeast.lat],
-  //               },
-  //               longitude: {
-  //                 between: [viewport.southwest.lng, viewport.northeast.lng],
-  //               },
-  //             },
-  //           },
-  //         })
-  //       );
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const postsResult = await API.graphql(
+          graphqlOperation(listPosts, {
+            filter: {
+              and: {
+                maxGuests: {
+                  ge: guests,
+                },
+                latitude: {
+                  between: [viewport.southwest.lat, viewport.northeast.lat],
+                },
+                longitude: {
+                  between: [viewport.southwest.lng, viewport.northeast.lng],
+                },
+              },
+            },
+          })
+        );
 
-  //       setPosts(postsResult.data.listPosts.items);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
+        setPosts(postsResult.data.listPosts.items);
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
-  //   fetchPosts();
-  // }, []);
+    fetchPosts();
+  }, []);
   return (
     <Tab.Navigator
       tabBarOptions={{

@@ -12,52 +12,57 @@ import SearchResults from "./screens/SearchResults";
 import HomeTabNavigator from "./navigation/HomeTabNavigator";
 
 const Stack = createStackNavigator();
-import { Amplify } from "aws-amplify";
+import { Amplify, Auth } from "aws-amplify";
 import awsConfig from "./src/aws-exports";
+import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react-native";
 
 Amplify.configure(awsConfig);
 
 export default function App() {
   return (
-    <NavigationContainer>
-      {/* <DestinationSearchScreen></DestinationSearchScreen> */}
-      {/* <SearchResults posts={feed}></SearchResults> */}
-      {/* <ScrollView>
+    <Authenticator.Provider>
+      <Authenticator>
+        <NavigationContainer>
+          {/* <DestinationSearchScreen></DestinationSearchScreen> */}
+          {/* <SearchResults posts={feed}></SearchResults> */}
+          {/* <ScrollView>
         <Post post={feed[0]}> </Post>
         <Post post={feed[2]}> </Post>
         <Post post={feed[3]}> </Post>
       </ScrollView> */}
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeTabNavigator}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name={"Destination Search"}
-          component={DestinationSearchScreen}
-          options={{
-            title: "Search your destination",
-          }}
-        />
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={HomeTabNavigator}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name={"Destination Search"}
+              component={DestinationSearchScreen}
+              options={{
+                title: "Search your destination",
+              }}
+            />
 
-        <Stack.Screen
-          name={"Guests"}
-          component={GuestsScreen}
-          options={{
-            title: "How many people?",
-          }}
-        />
+            <Stack.Screen
+              name={"Guests"}
+              component={GuestsScreen}
+              options={{
+                title: "How many people?",
+              }}
+            />
 
-        <Stack.Screen
-          name={"Post"}
-          component={PostScreen}
-          options={{
-            title: "Accommodation",
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+            <Stack.Screen
+              name={"Post"}
+              component={PostScreen}
+              options={{
+                title: "Accommodation",
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Authenticator>
+    </Authenticator.Provider>
   );
 }
 

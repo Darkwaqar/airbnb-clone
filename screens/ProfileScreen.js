@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import React from "react";
+import { Auth } from "aws-amplify";
 
 const ProfileScreen = () => {
   const logout = () => {
-    // Auth.signOut();
+    Auth.signOut();
   };
   return (
     <View
